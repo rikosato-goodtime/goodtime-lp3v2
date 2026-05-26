@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>お問い合わせを受け付けました｜バズトル</title>
+  <meta name="description" content="バズトルへのお問い合わせを受け付けました。お急ぎの方は日程調整ページよりお打ち合わせ日時をご予約ください。" />
+  <style>
+    :root {
+      --orange: #ff6a00;
+      --orange-dark: #f25500;
+      --orange-light: #ff9b21;
+      --black: #201f1e;
+      --text: #2b2b2b;
+      --muted: #666;
+      --cream: #fbf7f1;
+      --white: #fff;
+      --overlay: rgba(22, 18, 16, 0.82);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 82% 8%, rgba(255, 106, 0, 0.12), transparent 26%),
+        linear-gradient(135deg, #302b28 0%, #3a3431 100%);
+      display: grid;
+      place-items: center;
+      padding: 64px 24px;
+    }
+
+    .modal {
+      position: relative;
+      width: min(100%, 1120px);
+      background: var(--cream);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(36px, 5vw, 72px) clamp(28px, 7vw, 88px);
+      overflow: hidden;
+    }
+
+    .modal::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      right: -70px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255, 106, 0, 0.08);
+      pointer-events: none;
+    }
+
+    .close {
+      position: absolute;
+      top: clamp(22px, 3vw, 34px);
+      right: clamp(22px, 3vw, 34px);
+      width: 40px;
+      height: 40px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      opacity: 0.62;
+    }
+
+    .close::before,
+    .close::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 34px;
+      height: 2px;
+      background: #8b8b8b;
+      border-radius: 999px;
+      transform-origin: center;
+    }
+
+    .close::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .close::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .close:hover {
+      opacity: 1;
+    }
+
+    .content {
+      max-width: 720px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      color: var(--orange);
+      font-size: clamp(30px, 4.4vw, 48px);
+      line-height: 1.25;
+      letter-spacing: 0.03em;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 0 0 30px;
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.95;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .button-wrap {
+      margin: 30px 0 40px;
+    }
+
+    .schedule-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: min(100%, 470px);
+      min-height: 76px;
+      padding: 18px 28px;
+      border-radius: 6px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: clamp(22px, 2.6vw, 30px);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      background: linear-gradient(90deg, var(--orange-dark), var(--orange-light));
+      box-shadow: 0 14px 28px rgba(255, 106, 0, 0.28);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .schedule-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(255, 106, 0, 0.34);
+      filter: brightness(1.02);
+    }
+
+    .schedule-button:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 22px rgba(255, 106, 0, 0.24);
+    }
+
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 1.9;
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 24px 14px;
+        align-items: start;
+      }
+
+      .modal {
+        padding: 48px 22px 36px;
+      }
+
+      .close {
+        top: 16px;
+        right: 14px;
+      }
+
+      .lead,
+      .note {
+        line-height: 1.85;
+      }
+
+      .schedule-button {
+        width: 100%;
+        min-height: 70px;
+      }
+    }
+  </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PGHFX4QX');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGHFX4QX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <main class="modal" aria-labelledby="thanks-title">
+    <button class="close" type="button" aria-label="閉じる" onclick="history.back()"></button>
+
+    <div class="content">
+      <h1 id="thanks-title">お問い合わせを受け付けました</h1>
+
+      <p class="lead">
+        お問い合わせありがとうございます。<br />
+        内容確認後、担当者より通常1〜2営業日以内にご連絡いたします。<br />
+        すぐにお打ち合わせをしたい方は、下記より日程調整をお願いします。
+      </p>
+
+      <div class="button-wrap">
+        <a class="schedule-button" href="https://timerex.net/s/riko.sato_4258_9fc9/8a97313d" target="_blank" rel="noopener noreferrer">
+          日程調整はこちら
+        </a>
+      </div>
+
+      <p class="note">
+        しばらく経っても連絡がない場合は、入力頂いたメールアドレスが間違っているか、<br />
+        当社からのメールが迷惑メールフォルダに振り分けられている可能性がございますので、<br />
+        再度お問い合わせをお願いいたします。<br />
+        また、ドメイン指定をされている場合は、「info@goodtime-inc.com」からのメールが受信できるよう、
+        あらかじめ設定をお願いいたします。
+      </p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>バズトル | ショート動画クリエイティブ制作サービス</title>
+  <meta name="description" content="広告運用・SNS運用に使える縦型ショート動画を、企画から編集までスピーディに納品。1本3万円、最低3本からご相談可能です。">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <style>
+    :root { --orange:#ff5a00; --orange2:#ff8a1c; --dark:#111; --max:1055px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; background:#fff; color:#111;
+      font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",YuGothic,Meiryo,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    .lp { width:100%; max-width:var(--max); margin:0 auto; overflow:hidden; background:#fff; box-shadow:0 0 28px rgba(0,0,0,.05); }
+    .section-img { display:block; width:100%; height:auto; margin:0; }
+    .image-section, .contact-section, .footer-section { position:relative; width:100%; }
+    /* 画像内CTAのクリック範囲。やや大きめに取って、押し漏れを防ぎます。 */
+    .img-cta {
+      position:absolute; z-index:5; display:block; color:transparent; text-decoration:none;
+      border-radius:999px; -webkit-tap-highlight-color:transparent; cursor:pointer;
+    }
+    .img-cta:focus-visible { outline:4px solid rgba(255,90,0,.7); outline-offset:4px; }
+    .cta-hero-main { left:3.2%; top:65.0%; width:55.2%; height:10.0%; }
+    .cta-hero-sub  { left:5.0%; top:75.4%; width:47.8%; height:6.2%; }
+    .cta-problem   { left:36.0%; top:86.0%; width:39.0%; height:8.5%; }
+    .cta-reason    { left:47.0%; top:86.8%; width:43.0%; height:8.8%; }
+    .cta-flow      { left:6.0%; top:85.3%; width:88.0%; height:8.8%; }
+    .cta-price     { left:7.5%; top:86.5%; width:85.0%; height:8.5%; }
+    .cta-scenes    { left:6.0%; top:86.8%; width:88.0%; height:8.8%; }
+    .cta-faq       { left:13.0%; top:85.8%; width:74.0%; height:9.0%; }
+    .cta-contact   { left:7.0%; top:77.0%; width:86.0%; height:16.5%; }
+    .formrun-section {
+      position:relative; z-index:2; width:100%; padding:28px 6.3% 42px;
+      background:linear-gradient(180deg,#fff 0%,#fff7ef 100%);
+    }
+    .formrun-frame {
+      width:100%; max-width:940px; margin:0 auto; padding:28px min(4vw, 34px) 34px;
+      border:2px solid rgba(255,90,0,.55); border-radius:26px; background:#fff;
+      box-shadow:0 12px 28px rgba(255,90,0,.08);
+      scroll-margin-top:32px;
+    }
+    .formrun-slot {
+      position:relative; width:100%; min-height:760px; overflow:visible; background:#fff;
+    }
+    .formrun-slot iframe, .formrun-slot .formrun-embed { width:100%; min-height:760px; border:0; display:block; background:#fff; }
+    .footer-link { position:absolute; z-index:4; top:28%; height:28%; transform:translateX(-50%); color:transparent; text-decoration:none; }
+    .footer-link.company { left:26%; width:18%; }
+    .footer-link.terms { left:51%; width:18%; }
+    .footer-link.privacy { left:75%; width:24%; }
+
+    /* 追従CTA：文字そのものは一切拡大・縮小しない。外側の光だけ2秒に1回動かす。 */
+    .sticky-cta {
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:20;
+      width:min(640px, calc(100vw - 28px)); min-height:68px; padding:0 24px; border-radius:999px;
+      display:flex; align-items:center; justify-content:center; gap:12px; overflow:visible;
+      color:#fff; text-decoration:none; white-space:nowrap;
+      background:linear-gradient(180deg,#ff9f30 0%,#ff6200 48%,#ee4100 100%);
+      box-shadow:0 10px 24px rgba(255,90,0,.32), inset 0 3px 0 rgba(255,255,255,.72), inset 0 -3px 0 rgba(120,20,0,.22);
+      border:3px solid rgba(255,255,255,.96);
+      isolation:isolate;
+    }
+    .sticky-cta::before {
+      content:""; position:absolute; inset:-7px; border-radius:inherit; z-index:-1; pointer-events:none;
+      background:rgba(255,90,0,.22); opacity:0; transform:scale(.98);
+      animation:ctaHalo 2s ease-in-out infinite;
+    }
+    .sticky-cta::after {
+      content:""; position:absolute; inset:3px; border-radius:inherit; z-index:0; pointer-events:none;
+      background:linear-gradient(110deg, transparent 0%, transparent 38%, rgba(255,255,255,.62) 50%, transparent 62%, transparent 100%);
+      transform:translateX(-120%); opacity:0;
+      animation:ctaShine 2s ease-in-out infinite;
+    }
+    .sticky-cta .label, .sticky-cta .arrow { position:relative; z-index:1; flex:0 0 auto; }
+    .sticky-cta .label {
+      font-weight:800; font-size:clamp(21px, 4vw, 32px); line-height:1; letter-spacing:.045em;
+      text-shadow:0 1px 0 rgba(120,20,0,.16);
+    }
+    .sticky-cta .arrow { font-size:40px; line-height:1; font-weight:400; margin-left:2px; }
+    @keyframes ctaHalo {
+      0%, 65%, 100% { opacity:0; transform:scale(.98); }
+      12% { opacity:1; transform:scale(1.025); }
+      28% { opacity:0; transform:scale(1.08); }
+    }
+    @keyframes ctaShine {
+      0%, 58%, 100% { opacity:0; transform:translateX(-120%); }
+      10% { opacity:.85; }
+      30% { opacity:0; transform:translateX(120%); }
+    }
+    @media (max-width: 640px) {
+      .sticky-cta { min-height:56px; bottom:12px; width:calc(100vw - 24px); padding:0 18px; gap:9px; border-width:2px; }
+      .sticky-cta .label { font-size:clamp(21px, 6.4vw, 27px); letter-spacing:.03em; font-weight:800; }
+      .sticky-cta .arrow { font-size:31px; }
+      .formrun-section { padding:20px 4.5% 32px; }
+      .formrun-frame { padding:20px 14px 26px; border-radius:18px; }
+      .formrun-slot { min-height:820px; }
+      .formrun-slot iframe, .formrun-slot .formrun-embed { min-height:820px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      .sticky-cta::before, .sticky-cta::after { animation:none; }
+    }
+  </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PGHFX4QX');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGHFX4QX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <main class="lp">
+    <section class="image-section">
+      <img class="section-img" src="assets/section-01-hero.png" alt="バズトル ショート動画クリエイティブを1本3万円で。広告運用・SNS運用に使える縦型ショート動画を企画から編集まで納品。">
+      <a class="img-cta cta-hero-main" href="#formrun" data-scroll-formrun aria-label="無料相談フォームへ移動"></a>
+      <a class="img-cta cta-hero-sub" href="#formrun" data-scroll-formrun aria-label="サービス資料・相談フォームへ移動"></a>
+    </section>
+
+    <section class="image-section">
+      <img class="section-img" src="assets/section-02-problem.png" alt="動画制作の工数が重い、ショート動画の勝ちパターンがわからない、広告用クリエイティブを継続的に出せない、外注コストが高いという悩みを解決。">
+      <a class="img-cta cta-problem" href="#formrun" data-scroll-formrun aria-label="無料相談フォームへ移動"></a>
+    </section>
+
+    <section class="image-section">
+      <img class="section-img" src="assets/section-03-reason.png" alt="バズトルが選ばれる理由。CVにつながる構成設計、1本3万円の明快価格、縦型ショートに特化、スピード納品と修正対応。">
+      <a class="img-cta cta-reason" href="#formrun" data-scroll-formrun aria-label="相談フォームへ移動"></a>
+    </section>
+
+    <section class="image-section">
+      <img class="section-img" src="assets/section-04-flow.png" alt="ご利用の流れ。ヒアリング、企画・構成、制作・編集、納品・修正。広告クリエイティブ、SNS投稿用動画、採用広報動画、サービス・商品紹介動画に対応。">
+      <a class="img-cta cta-flow" href="#formrun" data-scroll-formrun aria-label="制作の流れについて相談する"></a>
+    </section>
+
+    <section class="image-section">
+      <img class="section-img" src="assets/section-05-price.png" alt="料金比較。一般的な他社は1本10万円、5本で月50万円。バズトルは1本3万円、5本で月15万円。最低3本から発注可能。">
+      <a class="img-cta cta-price" href="#formrun" data-scroll-formrun aria-label="無料相談フォームへ移動"></a>
+    </section>
+
+    <section class="image-section">
+      <img class="section-img" src="assets/section-06-scenes.png" alt="広告運用でCV数を伸ばしたい、SNS発信を強化したい、採用広報で応募につなげたい、サービス紹介で問い合わせ・CVにつなげたい方向け。">
+      <a class="img-cta cta-scenes" href="#formrun" data-scroll-formrun aria-label="自社に合う活用方法を相談する"></a>
+    </section>
+
+    <section class="image-section">
+      <img class="section-img" src="assets/section-07-faq.png" alt="よくある質問。最低3本から依頼可能、素材がなくても依頼可能、CV獲得向け広告動画やBtoB商材にも対応、修正は基本プラン内で2回まで、最短3営業日納品。">
+      <a class="img-cta cta-faq" href="#formrun" data-scroll-formrun aria-label="無料相談フォームへ移動"></a>
+    </section>
+
+    <section class="contact-section" id="contact" aria-label="お問い合わせ">
+      <img class="section-img" src="assets/section-08-contact-top.png" alt="まずはお気軽にご相談ください。無料相談はこちら。初回相談無料、最低3本から、オンライン相談対応。">
+      <a class="img-cta cta-contact" href="#formrun" data-scroll-formrun aria-label="無料相談フォームへ移動"></a>
+    </section>
+
+    <section class="formrun-section" aria-label="お問い合わせフォーム">
+      <div class="formrun-frame" id="formrun">
+        <div class="formrun-slot">
+          <script src="https://sdk.form.run/js/v2/embed.js"></script>
+          <div
+            class="formrun-embed"
+            data-formrun-form="@goodtime-lp3"
+            data-formrun-redirect="true"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-section" aria-label="フッター">
+      <img class="section-img" src="assets/section-08-footer.png" alt="会社概要、利用規約、プライバシーポリシー。">
+      <a class="footer-link company" href="company.html" aria-label="会社概要"></a>
+      <a class="footer-link terms" href="terms.html" aria-label="利用規約"></a>
+      <a class="footer-link privacy" href="privacy.html" aria-label="プライバシーポリシー"></a>
+    </section>
+  </main>
+  <a class="sticky-cta" href="#formrun" data-scroll-formrun aria-label="無料相談フォームへ移動">
+    <span class="label">無料相談する</span>
+    <span class="arrow" aria-hidden="true">›</span>
+  </a>
+  <script>
+    document.querySelectorAll('[data-scroll-formrun]').forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        var target = document.getElementById('formrun');
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#formrun');
+      });
+    });
+  </script>
+</body>
+</html>
